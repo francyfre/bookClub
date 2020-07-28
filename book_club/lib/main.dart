@@ -1,4 +1,8 @@
+import 'package:book_club/screens/login/login.dart';
+import 'package:book_club/states/currentUser.dart';
+import 'package:book_club/utils/ourTheme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -7,13 +11,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return ChangeNotifierProvider(
+      create: (context) => CurrentUser(),
+          child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: OurTheme().buildTheme(), // () creoInstanza
+        home: OurLogin(),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
