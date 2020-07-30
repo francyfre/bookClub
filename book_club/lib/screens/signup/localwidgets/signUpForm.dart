@@ -18,21 +18,23 @@ class _OurSignUpFormState extends State<OurSignUpForm> {
   TextEditingController _confirmPasswordController = TextEditingController();
 
   // metodo che lancia il log
-  _signUpUser(String email, String password, BuildContext context) async {
+  _signUpUser(String email, String password, BuildContext context,
+      String fullName) async {
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
 
     try {
-      String _returnString = await _currentUser.signUpUser(email, password); // operazione!
+      String _returnString =
+          await _currentUser.signUpUser(email.trim(), password.trim(), fullName);
       // registro utente!!!
       if (_returnString == "success") {
         Navigator.pop(context); // torniamoIndietro
-      }else{
+      } else {
         Scaffold.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(_returnString),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
+          SnackBar(
+            content: Text(_returnString),
+            duration: Duration(seconds: 2),
+          ),
+        );
       }
     } catch (e) {
       print(e);
@@ -103,18 +105,20 @@ class _OurSignUpFormState extends State<OurSignUpForm> {
             ),
             onPressed: () {
               // controlliamo i controller dei testi di password
-              if (_passwordController == _confirmPasswordController) {
+              if (_passwordController.text.trim() ==
+                  _confirmPasswordController.text.trim()) {
                 // nostra funzione che fa loggare!
                 _signUpUser(
                   _emailController.text,
                   _passwordController.text,
                   context,
+                  _fullNameController.text,
                 );
               } else {
                 Scaffold.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Password do not match'),
-                    duration: Duration(seconds: 2),
+                    duration: Duration(seconds: 4),
                   ),
                 );
               }

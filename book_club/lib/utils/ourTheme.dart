@@ -7,34 +7,35 @@ class OurTheme {
 
   ThemeData buildTheme() {
     return ThemeData(
-        canvasColor: _lightGreen,
-        primaryColor: _lightGreen,
-        accentColor: _lightGrey,
-        secondaryHeaderColor: _darkGrey,
-        hintColor: _lightGrey,
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
-            borderSide: BorderSide(
-              color: _lightGrey,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
-            borderSide: BorderSide(
-              color: _lightGreen,
-            ),
+      canvasColor: _lightGreen,
+      primaryColor: _lightGreen,
+      accentColor: _lightGrey,
+      secondaryHeaderColor: _darkGrey,
+      hintColor: _lightGrey,
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          borderSide: BorderSide(
+            color: _lightGrey,
           ),
         ),
-        buttonTheme: ButtonThemeData(
-          // themaBottonePresente
-          buttonColor: _darkGrey,
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          minWidth: 200.0,
-          height: 40.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          borderSide: BorderSide(
+            color: _lightGreen,
           ),
-        ));
+        ),
+      ),
+      buttonTheme: ButtonThemeData(
+        // themaBottonePresente
+        buttonColor: _darkGrey,
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        minWidth: 150.0,
+        height: 40.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+      ),
+    );
   }
 }

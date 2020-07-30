@@ -1,4 +1,5 @@
 import 'package:book_club/screens/home/home.dart';
+import 'package:book_club/screens/root/root.dart';
 import 'package:book_club/screens/signup/signup.dart';
 import 'package:book_club/states/currentUser.dart';
 import 'package:book_club/widgets/ourContainer.dart';
@@ -38,17 +39,16 @@ class _OurLoginFormState extends State<OurLoginForm> {
               await _currentUser.loginUserWithEmail(email, password);
           break;
         case LoginType.google:
-          _returnString = await _currentUser.loginWithGoogle();
+          _returnString = await _currentUser.loginUserWithGoogle();
           break;
         default:
       }
 
       if (_returnString == "success") {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => HomeScreen(),
-          ),
-        );
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+            (route) => false);
       } else {
         Scaffold.of(context).showSnackBar(
           SnackBar(
