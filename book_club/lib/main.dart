@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
+      // Provider per logIn e signUp!
       create: (context) => CurrentUser(),
           child: MaterialApp(
         debugShowCheckedModeBanner: false,

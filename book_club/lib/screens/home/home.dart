@@ -6,13 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
+  
   // metodo per cambio pagina
   void _goToNoGroup(BuildContext context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => OurNoGroup()));
   }
 
-  // metodo per logiut
+  // metodo per logout
   void _signOut(BuildContext context) async {
     CurrentUser _currentUser =
         Provider.of<CurrentUser>(context, listen: false); // recuperoUtente
@@ -34,6 +35,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 40.0),
           Padding(
             padding: const EdgeInsets.all(20.0),
+            // nostroContainer
             child: OurContainer(
               child: Column(
                 children: <Widget>[
@@ -59,9 +61,10 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   RaisedButton(
-                      child: Text('Finished Book',
-                          style: TextStyle(color: Colors.white)),
-                      onPressed: () {})
+                    child: Text('Finished Book',
+                        style: TextStyle(color: Colors.white)),
+                    onPressed: () {},
+                  ),
                 ],
               ),
             ),
@@ -93,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
             child: RaisedButton(
               child: Text(
-                'BookClub history',
+                'BookClub History',
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () => _goToNoGroup(context),

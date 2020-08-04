@@ -5,10 +5,15 @@ import 'package:book_club/screens/splashScreen/splashScreen.dart';
 import 'package:book_club/states/currentUser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-// PAGINA BASE DOVE APPRODIAMO SE LOGGATI
+// PAGINA BASE DOVE APPRODIAMO SE LOGGATI, CHE INOLTRA IN BASE AL LOG!
 
 // due stati possibili, loggato o no, AuthStatus nostro creato ora qui
-enum AuthStatus { unknown, notLoggedIn, notInGroup, inGroup }
+enum AuthStatus {
+  unknown,
+  notLoggedIn,
+  notInGroup,
+  inGroup,
+}
 
 class OurRoot extends StatefulWidget {
   @override
@@ -16,7 +21,7 @@ class OurRoot extends StatefulWidget {
 }
 
 class _OurRootState extends State<OurRoot> {
-  AuthStatus _authStatus = AuthStatus.unknown; // dafault
+  AuthStatus _authStatus = AuthStatus.unknown; // statoInteraAppDefault
 
   // Called when a dependency of this State object changes.
   // AD OGNI AGGIORNAMENTO DELLO STATO GENERALE, RIPRENDE LO STATO VECCHIO
@@ -26,6 +31,7 @@ class _OurRootState extends State<OurRoot> {
 
     // get the state, check currentUser and set AuthState based on state
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
+
     String _returnString = await _currentUser.onStartUp(); // nostro metodo
     if (_returnString == 'success') {
       // controlliamo che non sia in un gruppo, abbia il groupId
@@ -35,7 +41,7 @@ class _OurRootState extends State<OurRoot> {
         });
       } else {
         setState(() {
-          _authStatus = AuthStatus.notInGroup; // non siamo nel gruppo
+          _authStatus = AuthStatus.notInGroup; // NON siamo nel gruppo
         });
       }
     } else {
@@ -50,7 +56,7 @@ class _OurRootState extends State<OurRoot> {
   Widget build(BuildContext context) {
     Widget retVal;
 
-    // ottima soluzione
+    // ottima soluzione, costruisce la pagina in base allo stato (loggati o meno)
     switch (_authStatus) {
       case AuthStatus.unknown:
         retVal = OurSplashScreen();

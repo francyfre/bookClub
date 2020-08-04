@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 // BOX BIANCO PER IL SIGN-UP
 class OurSignUpForm extends StatefulWidget {
-  // StatefulWidget pre TextEditingController!!!!!
+  // StatefulWidget per TextEditingController!!!!!
 
   @override
   _OurSignUpFormState createState() => _OurSignUpFormState();
@@ -23,6 +23,7 @@ class _OurSignUpFormState extends State<OurSignUpForm> {
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
 
     try {
+      // chiamo signUpUser della funzione che passa il Provider!!!
       String _returnString =
           await _currentUser.signUpUser(email.trim(), password.trim(), fullName);
       // registro utente!!!

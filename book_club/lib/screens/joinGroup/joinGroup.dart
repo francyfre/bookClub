@@ -1,4 +1,8 @@
+import 'package:book_club/screens/root/root.dart';
+import 'package:book_club/services/database.dart';
+import 'package:book_club/states/currentUser.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OurJoinGroup extends StatefulWidget {
   @override
@@ -6,13 +10,21 @@ class OurJoinGroup extends StatefulWidget {
 }
 
 class _OurJoinGroupState extends State<OurJoinGroup> {
-  void _goToAddBook(BuildContext context, String groupName) async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {}
-      ),
-    );
+
+  void _joinGroup(BuildContext context, String groupId) async {
+    CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
+
+    String _returnString = await OurDatabase()
+        .joinGroup(groupId, _currentUser.getCurentUser.uid);
+
+    if (_returnString == "success") {
+      // se tutto a posto torniamo all'inizio!
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => OurRoot()),
+        (route) => false,
+      );
+    }
   }
 
   TextEditingController _groupIdController = TextEditingController();
@@ -56,7 +68,7 @@ class _OurJoinGroupState extends State<OurJoinGroup> {
                       ),
                     ),
                     onPressed: () =>
-                        _goToAddBook(context, _groupIdController.text),
+                        _joinGroup(context, _groupIdController.text),
                   ),
                 ],
               ),

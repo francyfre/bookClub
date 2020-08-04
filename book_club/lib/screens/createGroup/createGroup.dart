@@ -1,4 +1,8 @@
+import 'package:book_club/screens/root/root.dart';
+import 'package:book_club/services/database.dart';
+import 'package:book_club/states/currentUser.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OurCreateGroup extends StatefulWidget {
   @override
@@ -6,13 +10,21 @@ class OurCreateGroup extends StatefulWidget {
 }
 
 class _OurCreateGroupState extends State<OurCreateGroup> {
-  void _goToAddBook(BuildContext context, String groupName) async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        //builder: (context) 
-      ),
-    );
+
+  void _createGroup(BuildContext context, String groupName) async {
+    CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
+
+    String _returnString = await OurDatabase()
+        .createGroup(groupName, _currentUser.getCurentUser.uid);
+
+    if (_returnString == "success") {
+      // se tutto a posto torniamo all'inizio!
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => OurRoot()),
+        (route) => false,
+      );
+    }
   }
 
   TextEditingController _groupNameController = TextEditingController();
@@ -47,7 +59,7 @@ class _OurCreateGroupState extends State<OurCreateGroup> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 80),
                       child: Text(
-                        "Add Book",
+                        "Create",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -56,7 +68,7 @@ class _OurCreateGroupState extends State<OurCreateGroup> {
                       ),
                     ),
                     onPressed: () =>
-                        _goToAddBook(context, _groupNameController.text),
+                        _createGroup(context, _groupNameController.text),
                   ),
                 ],
               ),

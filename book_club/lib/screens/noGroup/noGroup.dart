@@ -2,15 +2,18 @@ import 'package:book_club/screens/createGroup/createGroup.dart';
 import 'package:book_club/screens/joinGroup/joinGroup.dart';
 import 'package:flutter/material.dart';
 
-// PAGINA BASE, DOPO ESSERSI LOGGATI; MA FUORI DAI GRUPPI!
+// PAGINA BASE, DOPO ESSERSI LOGGATI; MA SEI FUORI DAI GRUPPI!
 class OurNoGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    // funzione per andare DOVE si ENTRA nei gruppi
     void _goToJoin(BuildContext context) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => OurJoinGroup()));
     }
 
+    // funzione per andare DOVE si CREANO i gruppi
     void _goToCreate(BuildContext context) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => OurCreateGroup()));

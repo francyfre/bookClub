@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 // BOX BIANCO PER IL LOG IN
 
+// ENUM per due differenti logIn... quindi identificarli
 enum LoginType {
   email,
   google,
@@ -22,6 +23,7 @@ class _OurLoginFormState extends State<OurLoginForm> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
+  // METODO PER LOGIN che manda al metodo giusto, sia per emailAndPassword che GoogleSignIn
   _loginUser({
     @required LoginType type,
     String email,
@@ -33,6 +35,7 @@ class _OurLoginFormState extends State<OurLoginForm> {
     try {
       String _returnString;
 
+      // qui si differenziano i casi di logIn (emailAndPassword e GoogleSignIn)
       switch (type) {
         case LoginType.email:
           _returnString =
@@ -47,7 +50,7 @@ class _OurLoginFormState extends State<OurLoginForm> {
       if (_returnString == "success") {
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
+            MaterialPageRoute(builder: (context) => OurRoot()),
             (route) => false);
       } else {
         Scaffold.of(context).showSnackBar(
@@ -62,12 +65,13 @@ class _OurLoginFormState extends State<OurLoginForm> {
     }
   }
 
-  // metodo per googleSignIn
+  // METODO PER LOGIN CON GOOGLE con google_sign_in e GoogleFingerPrint
   Widget _googleButton() {
     return OutlineButton(
       splashColor: Colors.grey,
       onPressed: () {
         _loginUser(
+          // manda al logIn con il google type
           type: LoginType.google,
           context: context,
         );
@@ -87,11 +91,13 @@ class _OurLoginFormState extends State<OurLoginForm> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10.0),
-              child: Text('Sign In with Google',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.grey,
-                  )),
+              child: Text(
+                'Sign In with Google',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.grey,
+                ),
+              ),
             )
           ],
         ),
@@ -101,6 +107,7 @@ class _OurLoginFormState extends State<OurLoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    // nostroContenitore!
     return OurContainer(
       child: Column(
         children: <Widget>[
